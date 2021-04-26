@@ -18,10 +18,9 @@ public class TeacherController {
 		School school = School.getInstance();
 		school.getTeachers().add(t);
 	}
-	public static void AssignGroupForTeacher(Teacher t, Group p) {
+	public static void AssignGroupForTeacher(Teacher t, Group p) throws SQLException {
 		t.setGroupID(p.getGroupID());
-		TeacherDAO.updateGroupID(t, p.getGroupID());//´ýÊµÏÖ
+		TeacherDAO.updateGroupID(t, p.getGroupID());//update teacher table in database
 		p.setTeacher(t);
-		//update teacher table in database 
 	}
 }

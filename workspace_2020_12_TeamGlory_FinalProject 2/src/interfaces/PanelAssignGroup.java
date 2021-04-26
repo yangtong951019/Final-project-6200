@@ -118,7 +118,12 @@ public class PanelAssignGroup extends JPanel {
 			return;
 		}else{
 			Group g = (Group)table.getValueAt(SelectedRow, 0);
-			TeacherController.AssignGroupForTeacher(t, g);
+			try {
+				TeacherController.AssignGroupForTeacher(t, g);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			System.out.println("Teacher's groupID: "+t.getGroupID());
 			System.out.println("Goup's Teacher: " +g.getTeacher().getName());
 		}

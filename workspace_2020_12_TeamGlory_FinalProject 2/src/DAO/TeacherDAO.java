@@ -55,7 +55,12 @@ public class TeacherDAO {
 		}
 		return TeacherID;
 	}
-	public static void updateGroupID(Teacher t, int groupID) {
-		
+	public static void updateGroupID(Teacher t, int groupID) throws SQLException {
+//		Connection conn = JDBCUtil.getConnection();
+//		String sql = "update teacher set `groupID`=? where `teacherID`=?";
+//		PreparedStatement ps=conn.prepareStatement(sql);
+//        ps.setInt(1,groupID );
+//        ps.setInt(2,t.getTeacherID() );
+//        ps.executeUpdate(sql);
 	}
 }
