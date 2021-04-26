@@ -15,6 +15,7 @@ import java.awt.Font;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.SwingConstants;
 
 public class MainApplication {
 
@@ -68,9 +69,7 @@ public class MainApplication {
 		splitPane.setLeftComponent(panelTop);
 		panelTop.setLayout(null);
 		
-		JButton btnNewButton_1 = new JButton("New button");
-		btnNewButton_1.setBounds(339, 41, 97, 23);
-		panelTop.add(btnNewButton_1);
+		
 		
 		JButton btnNewButton_2 = new JButton("New button");
 		btnNewButton_2.setBounds(588, 41, 97, 23);
@@ -83,8 +82,10 @@ public class MainApplication {
 		
 		PanelWelcome panelWelcome=new PanelWelcome(panelBottom);
 		PanelViewStudent panelViewStudent=new PanelViewStudent(panelBottom);
+		PanelViewTeacher panelViewTeacher = new PanelViewTeacher(panelBottom);
 		panelBottom.add(panelWelcome,"panelWelcome");
 		panelBottom.add(panelViewStudent,"panelViewStudent");
+		panelBottom.add(panelViewTeacher,"panelViewTeacher");
 		
 		JButton btnViewStudent = new JButton("View Students");
 		btnViewStudent.addActionListener(new ActionListener() {
@@ -93,7 +94,17 @@ public class MainApplication {
 			}
 		});
 		btnViewStudent.setFont(new Font("Times New Roman", Font.PLAIN, 16));
-		btnViewStudent.setBounds(95, 19, 140, 66);
+		btnViewStudent.setBounds(69, 18, 140, 66);
 		panelTop.add(btnViewStudent);
+		
+		JButton btnViewTeacher = new JButton("View Teacher");
+		btnViewTeacher.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				card.show(panelBottom, "panelViewTeacher");
+			}
+		});
+		btnViewTeacher.setFont(new Font("Times New Roman", Font.PLAIN, 16));
+		btnViewTeacher.setBounds(270, 18, 140, 66);
+		panelTop.add(btnViewTeacher);
 	}
 }

@@ -1,2 +1,6 @@
 /DAO/
+/controller/
+/factories/
+/models/
+/interfaces/
 /dataGenerator/
