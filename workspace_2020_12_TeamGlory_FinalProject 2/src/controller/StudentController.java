@@ -25,6 +25,17 @@ public class StudentController {
 			classroom.getGroups().add(group);
 		}
 	}
+	
+	public static void addStudent(String name, int age, int grade) throws SQLException {
+		for(Classroom classroom:School.getInstance().getClassrooms()) {
+			if(checkClassroom(age,classroom)) {
+				addStudent(name, age, grade,classroom);
+				return;
+			}
+		}
+		Classroom classroom=addSuitableClass(age);
+		addStudent(name, age, grade,classroom);
+	}
 
 	public static boolean checkClassroom(int age, Classroom classroom) {
 		if (age < classroom.getMinAge() || age > classroom.getMaxAge())
