@@ -69,7 +69,6 @@ public class PanelViewTeacher extends JPanel {
 				
 			}
 		});
-		panelRight.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		panelRight.add(btnAddTeacher);
 		panelRight.add(btnAssignGroup);
 		table = new JTable();
@@ -92,8 +91,6 @@ public class PanelViewTeacher extends JPanel {
 		School school = School.getInstance();
 		DefaultTableModel model = (DefaultTableModel) table.getModel();
 		model.setRowCount(0);
-//		try {
-//			for (Teacher t : TeacherDAO.getTeachers()) {
 			for (Teacher t : school.getTeachers()) {
 				Object[] row = new Object[5];
 				row[0] = t;
@@ -102,12 +99,7 @@ public class PanelViewTeacher extends JPanel {
 				row[3] = t.getCredits();
 				row[4] = t.getGroupID();
 				model.addRow(row);
-		}
-//		} catch (SQLException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-		
+		}		
 	}
 
 }

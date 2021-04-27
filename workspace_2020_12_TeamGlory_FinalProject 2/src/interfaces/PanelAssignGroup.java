@@ -61,14 +61,8 @@ public class PanelAssignGroup extends JPanel {
 
 		table = new JTable();
 		table.setBorder(new EmptyBorder(10, 10, 0, 0));
-		table.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null, null, null},
-			},
-			new String[] {
-				"Group", "Max Age", "Min Age", "Class"
-			}
-		));
+		table.setModel(new DefaultTableModel(new Object[][] { { null, null, null, null }, },
+				new String[] { "Group", "Min Age", "Max Age", "Class" }));
 		JScrollPane panelTable = new JScrollPane(table);
 		add(panelTable, BorderLayout.CENTER);
 
@@ -86,21 +80,22 @@ public class PanelAssignGroup extends JPanel {
 	}
 
 	public void populateTable() {
-		
+
 		School school = School.getInstance();
 		DefaultTableModel model = (DefaultTableModel) table.getModel();
 		model.setRowCount(0);
 		for (Classroom c : school.getClassrooms()) {
-			for(Group g : c.getGroups()) {
-				if(g.getTeacher()==null) {
+			for (Group g : c.getGroups()) {
+				if (g.getTeacher() == null) {
 					Object[] row = new Object[4];
 					row[0] = g;
-					row[1] = c.getMaxAge();
-					row[2] = c.getMinAge();
+					row[1] = c.getMinAge();
+					if (c.getMaxAge() != Integer.MAX_VALUE)
+						row[2] = c.getMaxAge();
 					row[3] = c.getClassroomID();
 					model.addRow(row);
 				}
-			}			
+			}
 		}
 	}
 
@@ -112,26 +107,23 @@ public class PanelAssignGroup extends JPanel {
 
 	private void btnSubmitAction(JPanel panelBottom) {
 		int SelectedRow = table.getSelectedRow();
-		if(SelectedRow == -1) {
-			JOptionPane.showMessageDialog(null, "Please select a row!", "WARNING",
-					JOptionPane.WARNING_MESSAGE);
+		if (SelectedRow == -1) {
+			JOptionPane.showMessageDialog(null, "Please select a row!", "WARNING", JOptionPane.WARNING_MESSAGE);
 			return;
-		}else{
-			Group g = (Group)table.getValueAt(SelectedRow, 0);
+		} else {
+			Group g = (Group) table.getValueAt(SelectedRow, 0);
 			try {
 				TeacherController.AssignGroupForTeacher(t, g);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			System.out.println("Teacher's groupID: "+t.getGroupID());
-			System.out.println("Goup's Teacher: " +g.getTeacher().getName());
 		}
-		panelBottom.remove(this); 
-		Component[] ca=panelBottom.getComponents(); 
-		PanelViewTeacher panelViewTeacher=(PanelViewTeacher) ca[ca.length-1];
+		panelBottom.remove(this);
+		Component[] ca = panelBottom.getComponents();
+		PanelViewTeacher panelViewTeacher = (PanelViewTeacher) ca[ca.length - 1];
 		panelViewTeacher.populateTable();
-		CardLayout card=(CardLayout) panelBottom.getLayout();
+		CardLayout card = (CardLayout) panelBottom.getLayout();
 		card.previous(panelBottom);
 	}
 

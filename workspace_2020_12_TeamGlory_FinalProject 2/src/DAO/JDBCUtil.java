@@ -9,9 +9,10 @@ import java.sql.Statement;
 public class JDBCUtil {
     static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";  
     static final String DB_URL = "jdbc:mysql://localhost:3306/daycare?serverTimezone=UTC";
-    static final String USERNAME = "root";
-    static final String PASSWORD = "anna513A";
-
+    //static final String USERNAME = "root";
+    //static final String PASSWORD = "anna513A";    
+    static final String USERNAME = "hw";
+    static final String PASSWORD = "123456";
 	static{
 		try {
 			Class.forName(JDBC_DRIVER);

@@ -25,7 +25,4 @@ public class CSVreader {
 		}
 	}
 	
-	public static void main(String[] arg) throws IOException {
-		CSVreader.readCSV();
-	}
 }
