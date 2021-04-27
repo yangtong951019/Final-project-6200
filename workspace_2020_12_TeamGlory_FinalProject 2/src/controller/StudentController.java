@@ -9,7 +9,7 @@ import models.Classroom;
 import models.Group;
 import models.School;
 import models.Student;
-
+//test~test
 public class StudentController {
 	public static void addStudent(String name, int age, int grade, Classroom classroom) throws SQLException {
 		Student s = StudentFactory.getStudent(name, age, grade);

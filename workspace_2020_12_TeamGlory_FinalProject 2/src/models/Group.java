@@ -45,4 +45,8 @@ public class Group {
 			students.add(s);
 		}
 	}
+	@Override
+	public String toString() {
+		return String.valueOf(this.groupID);
+	}
 }

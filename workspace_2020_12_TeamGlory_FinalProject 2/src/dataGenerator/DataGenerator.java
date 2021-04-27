@@ -10,6 +10,7 @@ import DAO.TeacherDAO;
 import models.Classroom;
 import models.Group;
 import models.School;
+import models.Teacher;
 
 public class DataGenerator {
 	public static void Generate() throws SQLException {
@@ -24,6 +25,7 @@ public class DataGenerator {
 			c.setGroups(groups);
 		}
 		school.setClassrooms(classrooms);
-		
+		ArrayList<Teacher> teachers = TeacherDAO.getTeachers();
+		school.setTeachers(teachers);
 	}
 }
