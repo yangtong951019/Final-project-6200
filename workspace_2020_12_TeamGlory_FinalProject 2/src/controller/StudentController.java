@@ -1,6 +1,8 @@
 package controller;
 
 import java.sql.SQLException;
+import java.util.Date;
+
 import DAO.ClassDAO;
 import DAO.GroupDAO;
 import DAO.StudentDAO;
@@ -9,42 +11,47 @@ import models.Classroom;
 import models.Group;
 import models.School;
 import models.Student;
+
 //test~test
 public class StudentController {
 	public static void addStudent(String name, int age, int grade, Classroom classroom) throws SQLException {
 		Student s = StudentFactory.getStudent(name, age, grade);
-		Group g = classroom.getGroups().get(classroom.getGroups().size() - 1);
-		if (g.getStudents().size() < classroom.getGroupSize()) {
-			s.setStudentID(StudentDAO.addStudent(s, g));
-			g.addStudent(s);
-		} else {
-			Group group = new Group();
-			group.setGroupID(GroupDAO.addGroup(classroom));
-			s.setStudentID(StudentDAO.addStudent(s, group));
-			group.addStudent(s);
-			classroom.getGroups().add(group);
-		}
-	}
-	
-	public static void addStudent(String name, int age, int grade) throws SQLException {
-		for(Classroom classroom:School.getInstance().getClassrooms()) {
-			if(checkClassroom(age,classroom)) {
-				addStudent(name, age, grade,classroom);
+		s.setRegistrationDay(new java.sql.Date(new Date().getTime()));
+		for (Group g : classroom.getGroups()) {
+			if (g.getStudents().size() < classroom.getGroupSize()) {
+				s.setStudentID(StudentDAO.addStudent(s, g));
+				g.addStudent(s);
 				return;
 			}
 		}
-		Classroom classroom=addSuitableClass(age);
-		addStudent(name, age, grade,classroom);
+		Group group = new Group();
+		group.setGroupID(GroupDAO.addGroup(classroom));
+		s.setStudentID(StudentDAO.addStudent(s, group));
+		group.addStudent(s);
+		classroom.getGroups().add(group);
+	}
+
+	public static void addStudent(String name, int age, int grade) throws SQLException {
+		for (Classroom classroom : School.getInstance().getClassrooms()) {
+			if (checkClassroom(age, classroom)) {
+				addStudent(name, age, grade, classroom);
+				return;
+			}
+		}
+		Classroom classroom = addSuitableClass(age);
+		addStudent(name, age, grade, classroom);
 	}
 
 	public static boolean checkClassroom(int age, Classroom classroom) {
 		if (age < classroom.getMinAge() || age > classroom.getMaxAge())
 			return false;
-		int size = classroom.getGroups().size();
-		if (size == classroom.getMaxGroupInOneRoom()
-				&& classroom.getGroups().get(size - 1).getStudents().size() == classroom.getGroupSize())
-			return false;
-		return true;
+		if (classroom.getGroups().size() < classroom.getMaxGroupInOneRoom())
+			return true;
+		for (Group g : classroom.getGroups()) {
+			if (g.getStudents().size() < classroom.getGroupSize())
+				return true;
+		}
+		return false;
 	}
 
 	public static Classroom addSuitableClass(int age) throws SQLException {
@@ -94,5 +101,33 @@ public class StudentController {
 		c.setClassroomID(ClassDAO.addClassroom(c));
 		School.getInstance().getClassrooms().add(c);
 		return c;
+	}
+
+	public static void UpdateStudentInformation(Student s, int age, int grade) throws SQLException {
+		StudentDAO.updateStudent(s, age, grade);
+		s.setAge(age);
+		s.setGrade(grade);
+		s.setRegistrationDay(new java.sql.Date(new Date().getTime()));
+	}
+
+	public static void UpdateStudentInformation(Student s, int age, int grade, Classroom classroom, Group group)
+			throws SQLException {
+		s.setAge(age);
+		s.setGrade(grade);
+		s.setRegistrationDay(new java.sql.Date(new Date().getTime()));
+		for (Group g : classroom.getGroups()) {
+			if (g.getStudents().size() < classroom.getGroupSize()) {
+				StudentDAO.updateStudent(s, age, grade, g);
+				group.getStudents().remove(s);
+				g.addStudent(s);
+				return;
+			}
+		}
+		Group g = new Group();
+		g.setGroupID(GroupDAO.addGroup(classroom));
+		StudentDAO.updateStudent(s, age, grade, g);
+		group.getStudents().remove(s);
+		g.addStudent(s);
+		classroom.getGroups().add(g);
 	}
 }

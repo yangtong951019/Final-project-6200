@@ -6,6 +6,8 @@ import java.awt.CardLayout;
 import javax.swing.JPanel;
 
 import java.sql.SQLException;
+import java.util.Date;
+
 import javax.swing.BoxLayout;
 import javax.swing.JSplitPane;
 
@@ -84,13 +86,14 @@ public class MainApplication {
 		PanelViewStudent panelViewStudent=new PanelViewStudent(panelBottom);
 		PanelViewTeacher panelViewTeacher = new PanelViewTeacher(panelBottom);
 		panelBottom.add(panelWelcome,"panelWelcome");
-		panelBottom.add(panelViewStudent,"panelViewStudent");
-		panelBottom.add(panelViewTeacher,"panelViewTeacher");
+	
 		
 		JButton btnViewStudent = new JButton("View Students");
 		btnViewStudent.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				card.show(panelBottom,"panelViewStudent");
+				panelBottom.removeAll();
+				panelBottom.add(panelViewStudent,"panelViewStudent");
+				card.next(panelBottom);
 			}
 		});
 		btnViewStudent.setFont(new Font("Times New Roman", Font.PLAIN, 16));
@@ -100,7 +103,9 @@ public class MainApplication {
 		JButton btnViewTeacher = new JButton("View Teacher");
 		btnViewTeacher.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				card.show(panelBottom, "panelViewTeacher");
+				panelBottom.removeAll();
+				panelBottom.add(panelViewTeacher,"panelViewTeacher");
+				card.next(panelBottom);
 			}
 		});
 		btnViewTeacher.setFont(new Font("Times New Roman", Font.PLAIN, 16));

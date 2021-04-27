@@ -1,5 +1,7 @@
 package factories;
 
+import java.util.Date;
+
 import models.Person;
 import models.Student;
 
@@ -13,7 +15,7 @@ public class StudentFactory extends PersonFactoryAPI {
 	public static Student getStudent(String name, int age, int grade) {
 		return new Student(name,age,grade);
 	}
-	public static Student getStudent(int studentID,String name, int age, int grade) {
-		return new Student(studentID,name,age,grade);
+	public static Student getStudent(int studentID,String name, int age, int grade,Date registrationDay) {
+		return new Student(studentID,name,age,grade,registrationDay);
 	}
 }

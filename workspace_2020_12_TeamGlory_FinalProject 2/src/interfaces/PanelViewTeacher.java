@@ -23,9 +23,9 @@ import models.Group;
 import models.School;
 import models.Student;
 import models.Teacher;
+import java.awt.GridLayout;
 
 public class PanelViewTeacher extends JPanel {
-	private JTable TeacherTable;
 	private JTable table;
 
 	/**
@@ -69,6 +69,7 @@ public class PanelViewTeacher extends JPanel {
 				
 			}
 		});
+		panelRight.setLayout(new GridLayout(5,1, 0, 0));
 		panelRight.add(btnAddTeacher);
 		panelRight.add(btnAssignGroup);
 		table = new JTable();

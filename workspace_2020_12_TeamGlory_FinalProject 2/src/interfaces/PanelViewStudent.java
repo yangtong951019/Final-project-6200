@@ -18,6 +18,7 @@ import models.Classroom;
 import models.Group;
 import models.School;
 import models.Student;
+import models.Teacher;
 
 import javax.swing.SwingConstants;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -31,7 +32,11 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
 import java.awt.event.ActionEvent;
+import java.awt.GridLayout;
 
 public class PanelViewStudent extends JPanel {
 	/**
@@ -51,8 +56,8 @@ public class PanelViewStudent extends JPanel {
 		add(lblStudentTable, BorderLayout.NORTH);
 
 		tableStudent = new JTable();
-		tableStudent.setModel(new DefaultTableModel(new Object[][] { { null, null, null, null, null }, },
-				new String[] { "StudentID", "Name", "Age", "Grade", "Classroom" }));
+		tableStudent.setModel(new DefaultTableModel(new Object[][] { { null, null, null, null, null, null, null }, },
+				new String[] { "StudentID", "Name", "Age", "Grade", "Registration Day", "Classroom", "Group" }));
 		JScrollPane panelTable = new JScrollPane(tableStudent);
 		add(panelTable, BorderLayout.CENTER);
 		populateTable();
@@ -74,9 +79,29 @@ public class PanelViewStudent extends JPanel {
 				fileChoose(new JButton());
 			}
 		});
-		panelRight.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		panelRight.setLayout(new GridLayout(5, 1, 0, 0));
 		panelRight.add(btnAddStudent);
 		panelRight.add(btnNewButton);
+
+		JButton btnReRgister = new JButton("Re-register");
+		btnReRgister.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int SelectedRow = tableStudent.getSelectedRow();
+				if (SelectedRow == -1) {
+					JOptionPane.showMessageDialog(null, "Please select a row!", "WARNING", JOptionPane.WARNING_MESSAGE);
+					return;
+				} else {
+					Student s = (Student) tableStudent.getValueAt(SelectedRow, 0);
+					Classroom c = (Classroom) tableStudent.getValueAt(SelectedRow, 5);
+					Group g = (Group) tableStudent.getValueAt(SelectedRow, 6);
+					PanelAlterStudent panelAlterStudent = new PanelAlterStudent(panelBottom, s, c,g);
+					panelBottom.add(panelAlterStudent);
+					CardLayout card = (CardLayout) panelBottom.getLayout();
+					card.next(panelBottom);
+				}
+			}
+		});
+		panelRight.add(btnReRgister);
 	}
 
 	public void populateTable() {
@@ -86,12 +111,14 @@ public class PanelViewStudent extends JPanel {
 		for (Classroom c : school.getClassrooms()) {
 			for (Group g : c.getGroups()) {
 				for (Student s : g.getStudents()) {
-					Object[] row = new Object[5];
+					Object[] row = new Object[7];
 					row[0] = s;
 					row[1] = s.getName();
 					row[2] = s.getAge();
 					row[3] = s.getGrade();
-					row[4] = c.getClassroomID();
+					row[4] = s.getRegistrationDay();
+					row[5] = c;
+					row[6] = g;
 					model.addRow(row);
 				}
 			}
@@ -100,7 +127,7 @@ public class PanelViewStudent extends JPanel {
 
 	private void fileChoose(JButton developer) {
 		JFileChooser chooser = new JFileChooser();
-		FileNameExtensionFilter filter = new FileNameExtensionFilter("csv","csv");
+		FileNameExtensionFilter filter = new FileNameExtensionFilter("csv", "csv");
 		chooser.setFileFilter(filter);
 		int returnVal = chooser.showOpenDialog(developer);
 		if (returnVal == JFileChooser.APPROVE_OPTION) {
@@ -113,13 +140,11 @@ public class PanelViewStudent extends JPanel {
 				CSVreader.readCSV(csv);
 				input.close();
 			} catch (IOException | SQLException e) {
-			    JOptionPane.showMessageDialog(null, "Upload Error", "Warning",
-			    	      JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Upload Error", "Warning", JOptionPane.ERROR_MESSAGE);
 				e.printStackTrace();
 			}
-		    JOptionPane.showMessageDialog(null, "Upload Successfull", "Information",
-		    	      JOptionPane.INFORMATION_MESSAGE);
-		    populateTable();
+			JOptionPane.showMessageDialog(null, "Upload Successfull", "Information", JOptionPane.INFORMATION_MESSAGE);
+			populateTable();
 		}
 	}
 }
