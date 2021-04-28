@@ -40,12 +40,15 @@ public class PanelOverdueList extends JPanel {
 		SimpleDateFormat sdf = new SimpleDateFormat();
         sdf.applyPattern("yyyy-MM-dd");  
 		String dateString = sdf.format(date);
+		setLayout(null);
 		JLabel lblNewLabel = new JLabel("Overdue Registration List");
+		lblNewLabel.setBounds(164, 1, 217, 24);
 		lblNewLabel.setFont(new Font("Times New Roman", Font.PLAIN, 20));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		add(lblNewLabel);
 		
 		table = new JTable();
+		table.setBounds(1, 27, 450, 16);
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
 				{null, null, null},
@@ -57,10 +60,12 @@ public class PanelOverdueList extends JPanel {
 		table.getColumnModel().getColumn(2).setPreferredWidth(147);
 		
 		JLabel lbPrsentDate = new JLabel("On");
+		lbPrsentDate.setBounds(357, 35, 126, 15);
 		add(lbPrsentDate);
 		lbPrsentDate.setText("by "+dateString);
 		add(table,BorderLayout.CENTER);
 		JScrollPane scrollPane = new JScrollPane(table);
+		scrollPane.setBounds(67, 60, 416, 459);
 		add(scrollPane);
 		populateTable();
 	}
