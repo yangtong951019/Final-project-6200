@@ -41,7 +41,7 @@ public class PanelOverdueList extends JPanel {
         sdf.applyPattern("yyyy-MM-dd");  
 		String dateString = sdf.format(date);
 		setLayout(null);
-		JLabel lblNewLabel = new JLabel("Overdue Registration List");
+		JLabel lblNewLabel = new JLabel("Overdue Registrations List");
 		lblNewLabel.setBounds(164, 1, 217, 24);
 		lblNewLabel.setFont(new Font("Times New Roman", Font.PLAIN, 20));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
