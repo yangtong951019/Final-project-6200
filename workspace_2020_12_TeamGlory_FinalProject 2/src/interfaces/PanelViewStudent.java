@@ -102,6 +102,24 @@ public class PanelViewStudent extends JPanel {
 			}
 		});
 		panelRight.add(btnReRgister);
+		
+		JButton btnNewButton_1 = new JButton("Vaccine situation");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int SelectedRow = tableStudent.getSelectedRow();
+				if (SelectedRow == -1) {
+					JOptionPane.showMessageDialog(null, "Please select a row!", "WARNING", JOptionPane.WARNING_MESSAGE);
+					return;
+				} else {
+					Student s = (Student) tableStudent.getValueAt(SelectedRow, 0);
+					PanelCheckVaccine panelCheckVaccine = new PanelCheckVaccine(panelBottom, s);
+					panelBottom.add(panelCheckVaccine);
+					CardLayout card = (CardLayout) panelBottom.getLayout();
+					card.next(panelBottom);
+				}
+			}
+		});
+		panelRight.add(btnNewButton_1);
 	}
 
 	public void populateTable() {
