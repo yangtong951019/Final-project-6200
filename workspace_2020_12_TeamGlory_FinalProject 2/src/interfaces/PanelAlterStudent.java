@@ -112,7 +112,7 @@ public class PanelAlterStudent extends JPanel {
 		}
 		if (age >= classroom.getMinAge() && age <= classroom.getMaxAge()) {
 			try {
-				StudentController.UpdateStudentInformation(s, age, grade);
+				StudentController.UpdateStudentInformation(s, age, grade,hib,dTap,pollio,hepatitisB,mMR,varicella);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -142,7 +142,7 @@ public class PanelAlterStudent extends JPanel {
 		if (c == null)
 			return;
 		try {
-			StudentController.UpdateStudentInformation(s, age, grade, c,group);
+			StudentController.UpdateStudentInformation(s, age, grade,hib,dTap,pollio,hepatitisB,mMR,varicella,c,group);
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();

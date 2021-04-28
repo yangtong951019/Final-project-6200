@@ -127,7 +127,7 @@ public class PanelAddStudent extends JPanel {
 		if (c == null)
 			return;
 		try {
-			StudentController.addStudent(name, age, grade, c);
+			StudentController.addStudent(name, age, grade,hib,dTap,pollio,hepatitisB,mMR,varicella,c);
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();

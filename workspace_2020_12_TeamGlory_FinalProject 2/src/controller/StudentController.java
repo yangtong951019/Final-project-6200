@@ -14,8 +14,8 @@ import models.Student;
 
 //test~test
 public class StudentController {
-	public static void addStudent(String name, int age, int grade, Classroom classroom) throws SQLException {
-		Student s = StudentFactory.getStudent(name, age, grade);
+	public static void addStudent(String name, int age, int grade, int hib, int dTap, int pollio, int hepatitisB,boolean mMR, boolean varicella,Classroom classroom) throws SQLException {
+		Student s = StudentFactory.getStudent(name, age, grade,hib,dTap,pollio,hepatitisB,mMR,varicella);
 		s.setRegistrationDay(new java.sql.Date(new Date().getTime()));
 		for (Group g : classroom.getGroups()) {
 			if (g.getStudents().size() < classroom.getGroupSize()) {
@@ -31,15 +31,15 @@ public class StudentController {
 		classroom.getGroups().add(group);
 	}
 
-	public static void addStudent(String name, int age, int grade) throws SQLException {
+	public static void addStudent(String name, int age, int grade,int hib, int dTap, int pollio, int hepatitisB,boolean mMR, boolean varicella) throws SQLException {
 		for (Classroom classroom : School.getInstance().getClassrooms()) {
 			if (checkClassroom(age, classroom)) {
-				addStudent(name, age, grade, classroom);
+				addStudent(name, age, grade,hib,dTap,pollio,hepatitisB,mMR,varicella,classroom);
 				return;
 			}
 		}
 		Classroom classroom = addSuitableClass(age);
-		addStudent(name, age, grade, classroom);
+		addStudent(name, age, grade,hib,dTap,pollio,hepatitisB,mMR,varicella,classroom);
 	}
 
 	public static boolean checkClassroom(int age, Classroom classroom) {
@@ -103,21 +103,21 @@ public class StudentController {
 		return c;
 	}
 
-	public static void UpdateStudentInformation(Student s, int age, int grade) throws SQLException {
-		StudentDAO.updateStudent(s, age, grade);
+	public static void UpdateStudentInformation(Student s, int age, int grade,int hib, int dTap, int pollio, int hepatitisB,boolean mMR, boolean varicella) throws SQLException {
+		StudentDAO.updateStudent(s, age, grade,hib,dTap,pollio,hepatitisB,mMR,varicella);
 		s.setAge(age);
 		s.setGrade(grade);
 		s.setRegistrationDay(new java.sql.Date(new Date().getTime()));
 	}
 
-	public static void UpdateStudentInformation(Student s, int age, int grade, Classroom classroom, Group group)
+	public static void UpdateStudentInformation(Student s, int age, int grade, int hib, int dTap, int pollio, int hepatitisB,boolean mMR, boolean varicella,Classroom classroom, Group group)
 			throws SQLException {
 		s.setAge(age);
 		s.setGrade(grade);
 		s.setRegistrationDay(new java.sql.Date(new Date().getTime()));
 		for (Group g : classroom.getGroups()) {
 			if (g.getStudents().size() < classroom.getGroupSize()) {
-				StudentDAO.updateStudent(s, age, grade, g);
+				StudentDAO.updateStudent(s, age, grade,hib,dTap,pollio,hepatitisB,mMR,varicella,g);
 				group.getStudents().remove(s);
 				g.addStudent(s);
 				return;
@@ -125,7 +125,7 @@ public class StudentController {
 		}
 		Group g = new Group();
 		g.setGroupID(GroupDAO.addGroup(classroom));
-		StudentDAO.updateStudent(s, age, grade, g);
+		StudentDAO.updateStudent(s, age, grade,hib,dTap,pollio,hepatitisB,mMR,varicella,g);
 		group.getStudents().remove(s);
 		g.addStudent(s);
 		classroom.getGroups().add(g);
