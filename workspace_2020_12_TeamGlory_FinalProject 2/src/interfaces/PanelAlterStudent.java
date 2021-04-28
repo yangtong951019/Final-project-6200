@@ -36,6 +36,8 @@ public class PanelAlterStudent extends JPanel {
 	private JTextField txtDTap;
 	private JTextField txtHepatitisB;
 	private JTextField txtHib;
+	private JCheckBox chckbxMMR;
+	private JCheckBox chckbxVaricella;
 
 	/**
 	 * Create the panel.
@@ -192,11 +194,11 @@ public class PanelAlterStudent extends JPanel {
 		lblVaricella.setBounds(349, 336, 80, 16);
 		add(lblVaricella);
 		
-		JCheckBox chckbxMMR = new JCheckBox("done (only one needed)");
+		chckbxMMR = new JCheckBox("done (only one needed)");
 		chckbxMMR.setBounds(431, 291, 200, 23);
 		add(chckbxMMR);
 		
-		JCheckBox chckbxVaricella = new JCheckBox("done (only one needed)");
+		chckbxVaricella = new JCheckBox("done (only one needed)");
 		chckbxVaricella.setBounds(431, 332, 200, 23);
 		add(chckbxVaricella);
 		
@@ -237,6 +239,12 @@ public class PanelAlterStudent extends JPanel {
 		String name = txtName.getText();
 		int age = Integer.parseInt(txtAge.getText());
 		int grade = Integer.parseInt(txtGrade.getText());
+		int hib = Integer.parseInt(txtHib.getText());
+		int dTap = Integer.parseInt(txtDTap.getText());
+		int pollio = Integer.parseInt(txtPolio.getText());
+		int hepatitisB = Integer.parseInt(txtHepatitisB.getText());
+		boolean mMR = chckbxMMR.isSelected();
+		boolean varicella = chckbxVaricella.isSelected();
 		if (age < 6) {
 			JOptionPane.showMessageDialog(null, "We Don't Accept Children Younger Than 6 Months", "WARNING",
 					JOptionPane.WARNING_MESSAGE);
@@ -244,7 +252,7 @@ public class PanelAlterStudent extends JPanel {
 		}
 		if (age >= classroom.getMinAge() && age <= classroom.getMaxAge()) {
 			try {
-				StudentController.UpdateStudentInformation(s, age, grade,hib,dTap,pollio,hepatitisB,mMR,varicella);
+				StudentController.UpdateStudentInformation(s, age,grade,hib,dTap,pollio,hepatitisB,mMR,varicella);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
