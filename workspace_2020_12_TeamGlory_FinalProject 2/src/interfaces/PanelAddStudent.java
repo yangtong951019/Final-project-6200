@@ -18,11 +18,18 @@ import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
+import java.awt.Color;
+import javax.swing.JCheckBox;
+import java.awt.SystemColor;
 
 public class PanelAddStudent extends JPanel {
 	private JTextField txtName;
 	private JTextField txtAge;
 	private JTextField txtGrade;
+	private JTextField txtPolio;
+	private JTextField txtDTap;
+	private JTextField txtHepatitisB;
+	private JTextField txtHib;
 
 	/**
 	 * Create the panel.
@@ -32,48 +39,50 @@ public class PanelAddStudent extends JPanel {
 
 		JLabel lblName = new JLabel("Name:");
 		lblName.setFont(new Font("Times New Roman", Font.PLAIN, 15));
-		lblName.setBounds(125, 73, 80, 22);
+		lblName.setBounds(79, 150, 80, 22);
 		add(lblName);
 
 		txtName = new JTextField();
 		txtName.setColumns(10);
-		txtName.setBounds(250, 74, 202, 21);
+		txtName.setBounds(140, 150, 97, 21);
 		add(txtName);
 
 		JLabel lblAge = new JLabel("Age:");
 		lblAge.setFont(new Font("Times New Roman", Font.PLAIN, 15));
-		lblAge.setBounds(125, 150, 80, 22);
+		lblAge.setBounds(79, 229, 80, 22);
 		add(lblAge);
 
 		txtAge = new JTextField();
 		txtAge.setColumns(10);
-		txtAge.setBounds(250, 151, 202, 21);
+		txtAge.setBounds(140, 229, 97, 21);
 		add(txtAge);
 
 		JLabel lblGrade = new JLabel("Grade:");
 		lblGrade.setFont(new Font("Times New Roman", Font.PLAIN, 15));
-		lblGrade.setBounds(125, 225, 80, 22);
+		lblGrade.setBounds(79, 314, 80, 22);
 		add(lblGrade);
 
 		txtGrade = new JTextField();
 		txtGrade.setColumns(10);
-		txtGrade.setBounds(250, 226, 202, 21);
+		txtGrade.setBounds(140, 314, 97, 21);
 		add(txtGrade);
 
 		JLabel lblHead = new JLabel("Add A Student");
+		lblHead.setForeground(new Color(128, 0, 128));
 		lblHead.setFont(new Font("Times New Roman", Font.PLAIN, 20));
 		lblHead.setHorizontalAlignment(SwingConstants.CENTER);
-		lblHead.setBounds(189, 24, 194, 33);
+		lblHead.setBounds(223, 24, 194, 33);
 		add(lblHead);
 
 		JButton btnAdd = new JButton("Add");
+		btnAdd.setBackground(Color.WHITE);
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				btnAddAction(panelBottom);
 			}
 		});
 		btnAdd.setFont(new Font("Times New Roman", Font.PLAIN, 15));
-		btnAdd.setBounds(233, 313, 97, 23);
+		btnAdd.setBounds(230, 407, 187, 23);
 		add(btnAdd);
 
 		JButton btnBack = new JButton("back");
@@ -85,6 +94,69 @@ public class PanelAddStudent extends JPanel {
 		btnBack.setFont(new Font("Times New Roman", Font.PLAIN, 15));
 		btnBack.setBounds(10, 10, 80, 23);
 		add(btnBack);
+		
+		JLabel lblVaccine = new JLabel("How many of those vaccines have you done?");
+		lblVaccine.setForeground(new Color(0, 0, 0));
+		lblVaccine.setFont(new Font("PT Serif Caption", Font.PLAIN, 12));
+		lblVaccine.setBounds(326, 81, 305, 16);
+		add(lblVaccine);
+		
+		JLabel lblDTap = new JLabel("DTap:");
+		lblDTap.setBounds(349, 132, 80, 16);
+		add(lblDTap);
+		
+		JLabel lblHepatitisB = new JLabel("HepatitisB:");
+		lblHepatitisB.setBounds(349, 172, 80, 16);
+		add(lblHepatitisB);
+		
+		JLabel lblHib = new JLabel("Hib:");
+		lblHib.setBounds(349, 211, 80, 16);
+		add(lblHib);
+		
+		JLabel lblMMR = new JLabel("MMR:");
+		lblMMR.setBounds(349, 295, 80, 16);
+		add(lblMMR);
+		
+		JLabel lblPolio = new JLabel("Polio:");
+		lblPolio.setBounds(349, 255, 80, 16);
+		add(lblPolio);
+		
+		JLabel lblVaricella = new JLabel("Varicella:");
+		lblVaricella.setBounds(349, 336, 80, 16);
+		add(lblVaricella);
+		
+		JCheckBox chckbxMMR = new JCheckBox("done (only one needed)");
+		chckbxMMR.setBounds(431, 291, 200, 23);
+		add(chckbxMMR);
+		
+		JCheckBox chckbxVaricella = new JCheckBox("done (only one needed)");
+		chckbxVaricella.setBounds(431, 332, 200, 23);
+		add(chckbxVaricella);
+		
+		txtPolio = new JTextField();
+		txtPolio.setBounds(441, 250, 69, 26);
+		add(txtPolio);
+		txtPolio.setColumns(10);
+		
+		txtDTap = new JTextField();
+		txtDTap.setColumns(10);
+		txtDTap.setBounds(441, 127, 69, 26);
+		add(txtDTap);
+		
+		txtHepatitisB = new JTextField();
+		txtHepatitisB.setColumns(10);
+		txtHepatitisB.setBounds(441, 167, 69, 26);
+		add(txtHepatitisB);
+		
+		txtHib = new JTextField();
+		txtHib.setColumns(10);
+		txtHib.setBounds(441, 206, 69, 26);
+		add(txtHib);
+		
+		JLabel lblStudentInfo = new JLabel("Student Info");
+		lblStudentInfo.setFont(new Font("PT Serif Caption", Font.PLAIN, 12));
+		lblStudentInfo.setBounds(125, 81, 112, 16);
+		add(lblStudentInfo);
 
 	}
 
