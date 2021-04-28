@@ -114,6 +114,7 @@ public class PanelAlterStudent extends JPanel {
 		txtName = new JTextField();
 		txtName.setColumns(10);
 		txtName.setBounds(140, 150, 97, 21);
+		txtName.setText(s.getName());
 		add(txtName);
 
 		JLabel lblAge = new JLabel("Age:");
@@ -124,6 +125,7 @@ public class PanelAlterStudent extends JPanel {
 		txtAge = new JTextField();
 		txtAge.setColumns(10);
 		txtAge.setBounds(140, 229, 97, 21);
+		txtAge.setText(s.getAge() + "");
 		add(txtAge);
 
 		JLabel lblGrade = new JLabel("Grade:");
@@ -134,6 +136,7 @@ public class PanelAlterStudent extends JPanel {
 		txtGrade = new JTextField();
 		txtGrade.setColumns(10);
 		txtGrade.setBounds(140, 314, 97, 21);
+		txtGrade.setText(s.getGrade() + "");
 		add(txtGrade);
 
 		JLabel lblHead = new JLabel("Student Re-registration");
@@ -196,30 +199,36 @@ public class PanelAlterStudent extends JPanel {
 		
 		chckbxMMR = new JCheckBox("done (only one needed)");
 		chckbxMMR.setBounds(431, 291, 200, 23);
+		chckbxMMR.setSelected(s.isMMR());
 		add(chckbxMMR);
 		
 		chckbxVaricella = new JCheckBox("done (only one needed)");
 		chckbxVaricella.setBounds(431, 332, 200, 23);
+		chckbxVaricella.setSelected(s.isVaricella());
 		add(chckbxVaricella);
 		
 		txtPolio = new JTextField();
 		txtPolio.setBounds(441, 250, 69, 26);
+		txtPolio.setText(s.getPollio()+"");
 		add(txtPolio);
 		txtPolio.setColumns(10);
 		
 		txtDTap = new JTextField();
 		txtDTap.setColumns(10);
 		txtDTap.setBounds(441, 127, 69, 26);
+		txtDTap.setText(s.getDTap()+"");
 		add(txtDTap);
 		
 		txtHepatitisB = new JTextField();
 		txtHepatitisB.setColumns(10);
 		txtHepatitisB.setBounds(441, 167, 69, 26);
+		txtHepatitisB.setText(s.getHepatitisB()+"");
 		add(txtHepatitisB);
 		
 		txtHib = new JTextField();
 		txtHib.setColumns(10);
 		txtHib.setBounds(441, 206, 69, 26);
+		txtHib.setText(s.getHib()+"");
 		add(txtHib);
 		
 		JLabel lblStudentInfo = new JLabel("Student Info");
@@ -236,7 +245,6 @@ public class PanelAlterStudent extends JPanel {
 	}
 
 	private void btnAlterAction(JPanel panelBottom, Student s, Classroom classroom,Group group) {
-		String name = txtName.getText();
 		int age = Integer.parseInt(txtAge.getText());
 		int grade = Integer.parseInt(txtGrade.getText());
 		int hib = Integer.parseInt(txtHib.getText());

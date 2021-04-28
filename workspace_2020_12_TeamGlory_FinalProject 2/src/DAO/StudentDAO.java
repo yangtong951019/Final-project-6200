@@ -32,7 +32,7 @@ public class StudentDAO {
 	public static int addStudent(Student student, Group group) throws SQLException {
 		int studentID = 0;
 		Connection conn = JDBCUtil.getConnection();
-		String sql = "insert into student(name,age,grade,registrationDay,Hib,DTap,Pollio,HepatitisB,MMR,Varicella,groupID) values(?,?,?,?,?,?,?,?,?,?,?)";
+		String sql = "insert into student(name,age,grade,registrationDay,Hib,DTap,Polio,HepatitisB,MMR,Varicella,groupID) values(?,?,?,?,?,?,?,?,?,?,?)";
 		PreparedStatement st = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 		st.setString(1, student.getName());
 		st.setInt(2, student.getAge());
@@ -56,7 +56,7 @@ public class StudentDAO {
 	public static void updateStudent(Student student, int age, int grade, int hib, int dTap, int pollio, int hepatitisB,
 			boolean mMR, boolean varicella) throws SQLException {
 		Connection conn = JDBCUtil.getConnection();
-		String sql = "update student set age=?,grade=?,registrationDay=?,Hib=?,DTap=?,Pollio=?,HepatitisB=?,MMR=?,Varicella=? where studentID=?";
+		String sql = "update student set age=?,grade=?,registrationDay=?,Hib=?,DTap=?,Polio=?,HepatitisB=?,MMR=?,Varicella=? where studentID=?";
 		PreparedStatement ps = conn.prepareStatement(sql);
 		ps.setInt(1, age);
 		ps.setInt(2, grade);
@@ -73,7 +73,7 @@ public class StudentDAO {
 
 	public static void updateStudent(Student student, int age, int grade,int hib, int dTap, int pollio, int hepatitisB, boolean mMR, boolean varicella,Group group) throws SQLException {
 		Connection conn = JDBCUtil.getConnection();
-		String sql = "update student set age=?,grade=?,registrationDay=?,Hib=?,DTap=?,Pollio=?,HepatitisB=?,MMR=?,Varicella=?,groupID=? where studentID=?";
+		String sql = "update student set age=?,grade=?,registrationDay=?,Hib=?,DTap=?,Polio=?,HepatitisB=?,MMR=?,Varicella=?,groupID=? where studentID=?";
 		PreparedStatement ps = conn.prepareStatement(sql);
 		ps.setInt(1, age);
 		ps.setInt(2, grade);
