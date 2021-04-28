@@ -114,7 +114,9 @@ public class StudentController {
 			throws SQLException {
 		s.setAge(age);
 		s.setGrade(grade);
-		s.setRegistrationDay(new java.sql.Date(new Date().getTime()));
+		Date date = new Date();
+		s.setRegistrationDay(date);
+		s.setRegistrationDay(new java.sql.Date(date.getTime()));
 		for (Group g : classroom.getGroups()) {
 			if (g.getStudents().size() < classroom.getGroupSize()) {
 				StudentDAO.updateStudent(s, age, grade,hib,dTap,pollio,hepatitisB,mMR,varicella,g);

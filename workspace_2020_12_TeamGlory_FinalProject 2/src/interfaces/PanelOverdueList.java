@@ -12,6 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import DAO.StudentDAO;
 import models.School;
 import models.Classroom;
 import models.Group;
@@ -21,6 +22,8 @@ import java.util.Date;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.awt.event.ActionEvent;
 import java.util.Date;
@@ -61,14 +64,14 @@ public class PanelOverdueList extends JPanel {
 		add(scrollPane);
 		populateTable();
 	}
-	
 	private void populateTable() {
+		System.out.println("populateOverdueList");
 		School school = School.getInstance();
 		DefaultTableModel model = (DefaultTableModel) table.getModel();
 		model.setRowCount(0);
 		for(Classroom c:school.getClassrooms()) {
 			for(Group g: c.getGroups()) {
-				for(Student s: g.getStudents()) {
+				for(Student s:g.getStudents()) {
 					if(date.getTime()-s.getRegistrationDay().getTime()>(1000*60*60*24*365)) {
 						Object[] row = new Object[3];
 						row[0] = s;

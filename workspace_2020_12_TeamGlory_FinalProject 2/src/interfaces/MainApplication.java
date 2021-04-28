@@ -85,15 +85,16 @@ public class MainApplication {
 		panelBottom.setLayout(card);
 		
 		PanelWelcome panelWelcome=new PanelWelcome(panelBottom);
-		PanelViewStudent panelViewStudent=new PanelViewStudent(panelBottom);
-		PanelViewTeacher panelViewTeacher = new PanelViewTeacher(panelBottom);
-		PanelOverdueList panelOverdueList = new PanelOverdueList(panelBottom);
+
+
+
 		panelBottom.add(panelWelcome,"panelWelcome");
 	
 		
 		JButton btnViewStudent = new JButton("View Students");
 		btnViewStudent.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				PanelViewStudent panelViewStudent=new PanelViewStudent(panelBottom);
 				panelBottom.removeAll();
 				panelBottom.add(panelViewStudent,"panelViewStudent");
 				card.next(panelBottom);
@@ -106,6 +107,7 @@ public class MainApplication {
 		JButton btnViewTeacher = new JButton("View Teacher");
 		btnViewTeacher.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				PanelViewTeacher panelViewTeacher = new PanelViewTeacher(panelBottom);
 				panelBottom.removeAll();
 				panelBottom.add(panelViewTeacher,"panelViewTeacher");
 				card.next(panelBottom);
@@ -117,6 +119,7 @@ public class MainApplication {
 		
 		btnOverdueRecord.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				PanelOverdueList panelOverdueList = new PanelOverdueList(panelBottom);
 				panelBottom.removeAll();
 				panelBottom.add(panelOverdueList,"panelOverdueList");
 				card.next(panelBottom);
