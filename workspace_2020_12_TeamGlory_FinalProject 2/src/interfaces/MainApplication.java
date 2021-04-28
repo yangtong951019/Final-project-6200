@@ -73,9 +73,11 @@ public class MainApplication {
 		
 		
 		
-		JButton btnNewButton_2 = new JButton("New button");
-		btnNewButton_2.setBounds(588, 41, 97, 23);
-		panelTop.add(btnNewButton_2);
+		JButton btnOverdueRecord = new JButton("Overdue Registrations List");
+
+		btnOverdueRecord.setFont(new Font("Times New Roman", Font.PLAIN, 16));
+		btnOverdueRecord.setBounds(529, 18, 216, 66);
+		panelTop.add(btnOverdueRecord);
 		
 		JPanel panelBottom = new JPanel();
 		splitPane.setRightComponent(panelBottom);
@@ -85,6 +87,7 @@ public class MainApplication {
 		PanelWelcome panelWelcome=new PanelWelcome(panelBottom);
 		PanelViewStudent panelViewStudent=new PanelViewStudent(panelBottom);
 		PanelViewTeacher panelViewTeacher = new PanelViewTeacher(panelBottom);
+		PanelOverdueList panelOverdueList = new PanelOverdueList(panelBottom);
 		panelBottom.add(panelWelcome,"panelWelcome");
 	
 		
@@ -109,7 +112,15 @@ public class MainApplication {
 			}
 		});
 		btnViewTeacher.setFont(new Font("Times New Roman", Font.PLAIN, 16));
-		btnViewTeacher.setBounds(270, 18, 140, 66);
+		btnViewTeacher.setBounds(307, 18, 140, 66);
 		panelTop.add(btnViewTeacher);
+		
+		btnOverdueRecord.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				panelBottom.removeAll();
+				panelBottom.add(panelOverdueList,"panelOverdueList");
+				card.next(panelBottom);
+			}
+		});
 	}
 }
