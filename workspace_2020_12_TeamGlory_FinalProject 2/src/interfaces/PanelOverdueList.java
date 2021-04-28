@@ -6,6 +6,7 @@ import javax.swing.SwingConstants;
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
+import java.awt.Color;
 import java.awt.Font;
 
 import javax.swing.JLabel;
@@ -20,13 +21,18 @@ import models.Student;
 
 import java.util.Date;
 import javax.swing.JTextField;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFrame;
+
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.awt.event.ActionEvent;
 import java.util.Date;
+import javax.swing.JLayeredPane;
 
 public class PanelOverdueList extends JPanel {
 	private JTable table;
@@ -42,7 +48,7 @@ public class PanelOverdueList extends JPanel {
 		String dateString = sdf.format(date);
 		setLayout(null);
 		JLabel lblNewLabel = new JLabel("Overdue Registrations List");
-		lblNewLabel.setBounds(164, 1, 217, 24);
+		lblNewLabel.setBounds(113, 6, 299, 24);
 		lblNewLabel.setFont(new Font("Times New Roman", Font.PLAIN, 20));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		add(lblNewLabel);
@@ -65,9 +71,15 @@ public class PanelOverdueList extends JPanel {
 		lbPrsentDate.setText("by "+dateString);
 		add(table,BorderLayout.CENTER);
 		JScrollPane scrollPane = new JScrollPane(table);
-		scrollPane.setBounds(67, 60, 416, 459);
+		scrollPane.setBounds(67, 60, 416, 352);
 		add(scrollPane);
+		
+		
+		
 		populateTable();
+		
+		
+		
 	}
 	private void populateTable() {
 		System.out.println("populateOverdueList");

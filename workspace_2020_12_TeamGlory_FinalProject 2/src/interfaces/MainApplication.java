@@ -9,11 +9,14 @@ import java.sql.SQLException;
 import java.util.Date;
 
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JSplitPane;
 
 import dataGenerator.DataGenerator;
 
 import java.awt.Font;
+import java.awt.Graphics;
+
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -76,7 +79,7 @@ public class MainApplication {
 		JButton btnOverdueRecord = new JButton("Overdue Registrations List");
 
 		btnOverdueRecord.setFont(new Font("Times New Roman", Font.PLAIN, 16));
-		btnOverdueRecord.setBounds(529, 18, 216, 66);
+		btnOverdueRecord.setBounds(529, 18, 202, 66);
 		panelTop.add(btnOverdueRecord);
 		
 		JPanel panelBottom = new JPanel();
@@ -84,7 +87,14 @@ public class MainApplication {
 		CardLayout card=new CardLayout(0, 0);
 		panelBottom.setLayout(card);
 		
-		PanelWelcome panelWelcome=new PanelWelcome(panelBottom);
+		PanelWelcome panelWelcome=new PanelWelcome(panelBottom) {
+				public void paintComponent(Graphics g) {
+				super.paintComponent(g);
+				ImageIcon img = new ImageIcon("daycare.jpeg");
+				img.setImage(img.getImage().getScaledInstance(900,600,20));
+				g.drawImage(img.getImage(), 0, 0, null);
+				}
+		};
 
 
 
@@ -101,7 +111,7 @@ public class MainApplication {
 			}
 		});
 		btnViewStudent.setFont(new Font("Times New Roman", Font.PLAIN, 16));
-		btnViewStudent.setBounds(69, 18, 140, 66);
+		btnViewStudent.setBounds(69, 18, 202, 66);
 		panelTop.add(btnViewStudent);
 		
 		JButton btnViewTeacher = new JButton("View Teacher");
@@ -114,7 +124,7 @@ public class MainApplication {
 			}
 		});
 		btnViewTeacher.setFont(new Font("Times New Roman", Font.PLAIN, 16));
-		btnViewTeacher.setBounds(307, 18, 140, 66);
+		btnViewTeacher.setBounds(307, 18, 202, 66);
 		panelTop.add(btnViewTeacher);
 		
 		btnOverdueRecord.addActionListener(new ActionListener() {
