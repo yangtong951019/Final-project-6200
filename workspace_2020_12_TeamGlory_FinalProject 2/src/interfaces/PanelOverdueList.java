@@ -82,7 +82,6 @@ public class PanelOverdueList extends JPanel {
 		
 	}
 	private void populateTable() {
-		System.out.println("populateOverdueList");
 		School school = School.getInstance();
 		DefaultTableModel model = (DefaultTableModel) table.getModel();
 		model.setRowCount(0);

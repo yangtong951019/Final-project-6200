@@ -2,6 +2,7 @@ package interfaces;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
@@ -24,6 +25,7 @@ import javax.swing.SwingConstants;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.FlowLayout;
 import java.awt.event.ActionListener;
 import java.io.File;

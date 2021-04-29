@@ -21,6 +21,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
+import java.awt.GridLayout;
 
 public class MainApplication {
 
@@ -72,20 +73,46 @@ public class MainApplication {
 		
 		JPanel panelTop = new JPanel();
 		splitPane.setLeftComponent(panelTop);
-		panelTop.setLayout(null);
+		panelTop.setLayout(new GridLayout(0, 3, 0, 0));
+		
+		JPanel panelBottom = new JPanel();
+		splitPane.setRightComponent(panelBottom);
+		CardLayout card=new CardLayout(0, 0);
+		panelBottom.setLayout(card);
+		
+		JButton btnViewTeacher = new JButton("View Teacher");
+		btnViewTeacher.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				PanelViewTeacher panelViewTeacher = new PanelViewTeacher(panelBottom);
+				panelBottom.removeAll();
+				panelBottom.add(panelViewTeacher,"panelViewTeacher");
+				card.next(panelBottom);
+			}
+		});
+		
+			
+			JButton btnViewStudent = new JButton("View Students");
+			btnViewStudent.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					PanelViewStudent panelViewStudent=new PanelViewStudent(panelBottom);
+					panelBottom.removeAll();
+					panelBottom.add(panelViewStudent,"panelViewStudent");
+					card.next(panelBottom);
+				}
+			});
+			btnViewStudent.setFont(new Font("Times New Roman", Font.PLAIN, 16));
+			panelTop.add(btnViewStudent);
+		btnViewTeacher.setFont(new Font("Times New Roman", Font.PLAIN, 16));
+		panelTop.add(btnViewTeacher);
 		
 		
 		
 		JButton btnOverdueRecord = new JButton("Overdue Registrations List");
 
 		btnOverdueRecord.setFont(new Font("Times New Roman", Font.PLAIN, 16));
-		btnOverdueRecord.setBounds(529, 18, 202, 66);
 		panelTop.add(btnOverdueRecord);
 		
-		JPanel panelBottom = new JPanel();
-		splitPane.setRightComponent(panelBottom);
-		CardLayout card=new CardLayout(0, 0);
-		panelBottom.setLayout(card);
+
 		
 		PanelWelcome panelWelcome=new PanelWelcome(panelBottom) {
 				public void paintComponent(Graphics g) {
@@ -99,33 +126,6 @@ public class MainApplication {
 
 
 		panelBottom.add(panelWelcome,"panelWelcome");
-	
-		
-		JButton btnViewStudent = new JButton("View Students");
-		btnViewStudent.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				PanelViewStudent panelViewStudent=new PanelViewStudent(panelBottom);
-				panelBottom.removeAll();
-				panelBottom.add(panelViewStudent,"panelViewStudent");
-				card.next(panelBottom);
-			}
-		});
-		btnViewStudent.setFont(new Font("Times New Roman", Font.PLAIN, 16));
-		btnViewStudent.setBounds(69, 18, 202, 66);
-		panelTop.add(btnViewStudent);
-		
-		JButton btnViewTeacher = new JButton("View Teacher");
-		btnViewTeacher.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				PanelViewTeacher panelViewTeacher = new PanelViewTeacher(panelBottom);
-				panelBottom.removeAll();
-				panelBottom.add(panelViewTeacher,"panelViewTeacher");
-				card.next(panelBottom);
-			}
-		});
-		btnViewTeacher.setFont(new Font("Times New Roman", Font.PLAIN, 16));
-		btnViewTeacher.setBounds(307, 18, 202, 66);
-		panelTop.add(btnViewTeacher);
 		
 		btnOverdueRecord.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
