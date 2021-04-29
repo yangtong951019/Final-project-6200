@@ -33,6 +33,7 @@ import java.text.SimpleDateFormat;
 import java.awt.event.ActionEvent;
 import java.util.Date;
 import javax.swing.JLayeredPane;
+import java.awt.GridLayout;
 
 public class PanelOverdueList extends JPanel {
 	private JTable table;
@@ -46,15 +47,15 @@ public class PanelOverdueList extends JPanel {
 		SimpleDateFormat sdf = new SimpleDateFormat();
         sdf.applyPattern("yyyy-MM-dd");  
 		String dateString = sdf.format(date);
-		setLayout(null);
+		setLayout(new BorderLayout(0, 0));
+		JPanel panel = new JPanel();
+		panel.setLayout(new GridLayout(2, 1, 0, 0));
 		JLabel lblNewLabel = new JLabel("Overdue Registrations List");
-		lblNewLabel.setBounds(113, 6, 299, 24);
 		lblNewLabel.setFont(new Font("Times New Roman", Font.PLAIN, 20));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		add(lblNewLabel);
-		
+		panel.add(lblNewLabel);
+		add(panel,BorderLayout.NORTH);
 		table = new JTable();
-		table.setBounds(1, 27, 450, 16);
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
 				{null, null, null},
@@ -66,13 +67,12 @@ public class PanelOverdueList extends JPanel {
 		table.getColumnModel().getColumn(2).setPreferredWidth(147);
 		
 		JLabel lbPrsentDate = new JLabel("On");
-		lbPrsentDate.setBounds(357, 35, 126, 15);
-		add(lbPrsentDate);
+		lbPrsentDate.setHorizontalAlignment(SwingConstants.CENTER);
+		panel.add(lbPrsentDate);
 		lbPrsentDate.setText("by "+dateString);
-		add(table,BorderLayout.CENTER);
 		JScrollPane scrollPane = new JScrollPane(table);
-		scrollPane.setBounds(67, 60, 416, 352);
-		add(scrollPane);
+		add(scrollPane,BorderLayout.CENTER);
+		
 		
 		
 		
