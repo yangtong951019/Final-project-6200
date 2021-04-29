@@ -15,7 +15,7 @@ public class CSVreader {
 			boolean sign = false;
 			while(reader.ready()) {
 				String line = reader.readLine();
-				StringTokenizer st = new StringTokenizer(line,";");
+				StringTokenizer st = new StringTokenizer(line,",");
 				int age,grade,hib,dTap,pollio,hepatitisB;
 				boolean mMR,varicella;
 				String name;
