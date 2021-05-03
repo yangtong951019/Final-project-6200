@@ -10,6 +10,8 @@ public class School {
 		return teachers;
 	}
 
+	private School() {};
+	
 	public void setTeachers(ArrayList<Teacher> teachers) {
 		this.teachers = teachers;
 	}
